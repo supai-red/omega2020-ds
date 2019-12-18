@@ -125,7 +125,12 @@ class Sudoku:
         Shows the puzzle as a 2-D string with a . (dot) as a placeholder for
         empty squares.
         """
-        pass
+        
+        width = 1 + max(len(self._values[s]) for s in self._boxes)
+        line = '+'.join(['-' * (width * 3)] * 3)
+        for r in self.row_values:
+            print(''.join(self._values[r + c].center(width) + ('|' if c in '36' else '') for c in self.column_values))
+            if r in 'CF': print(line)
 
     def show_solved_attempt(self):
 
