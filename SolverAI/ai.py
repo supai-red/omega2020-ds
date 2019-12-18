@@ -19,8 +19,9 @@ class Sudoku:
     row_values = "ABCDEFGHI"
     column_values = "123456789"
 
-    def __init__(self):
-        pass
+    def __init__(self, puzzle, technique='single_position'):
+        self.puzzle = puzzle
+        self.technique = technique
 
     def single_position(self):
         pass
