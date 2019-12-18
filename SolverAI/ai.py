@@ -30,6 +30,7 @@ class Sudoku:
         self._unitlist = self._row_units + self._column_units + self._square_units
         self._units = dict((s, [u for u in self._unitlist if s in u]) for s in self._boxes)
         self._peers = dict((s, set(sum(self._units[s], [])) - set([s])) for s in self._boxes)
+        self.values = dict(zip(self._boxes, ["123456789" if element == "." else element for element in self.puzzle]))
 
     def single_position(self):
         pass
