@@ -20,7 +20,7 @@ class Sudoku:
     column_values = "123456789"
 
     def __init__(self, puzzle, technique='single_position'):
-        self.puzzle = puzzle
+        self._puzzle = puzzle
         self.technique = technique
         self._combined = lambda rows, columns: [each_letter + every_number for each_letter in rows for every_number in columns]
         self._boxes = self._combined(self.row_values, self.column_values)
@@ -30,7 +30,7 @@ class Sudoku:
         self._unitlist = self._row_units + self._column_units + self._square_units
         self._units = dict((s, [u for u in self._unitlist if s in u]) for s in self._boxes)
         self._peers = dict((s, set(sum(self._units[s], [])) - set([s])) for s in self._boxes)
-        self.values = dict(zip(self._boxes, ["123456789" if element == "." else element for element in self.puzzle]))
+        self._values = dict(zip(self._boxes, ["123456789" if element == "." else element for element in self._puzzle]))
 
     def single_position(self):
         pass
