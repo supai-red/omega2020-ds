@@ -23,6 +23,13 @@ class Sudoku:
         self.puzzle = puzzle
         self.technique = technique
         self._combined = lambda rows, columns: [each_letter + every_number for each_letter in rows for every_number in columns]
+        self._boxes = self._combined(self.row_values, self.column_values)
+        self._row_units = [self._combined(each_letter, self.column_values) for each_letter in self.row_values]
+        self._column_units = [self._combined(self.row_values, every_number) for every_number in self.column_values]
+        self._square_units = [self._combined(rs, cs) for rs in ("ABC", "DEF", "GHI") for cs in ("123", "456", "789")]
+        self._unitlist = self._row_units + self._column_units + self._square_units
+        self._units = dict((s, [u for u in self._unitlist if s in u]) for s in self._boxes)
+        self._peers = dict((s, set(sum(self._units[s], [])) - set([s])) for s in self._boxes)
 
     def single_position(self):
         pass
