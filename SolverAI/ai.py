@@ -20,6 +20,7 @@ class Sudoku:
     column_values = "123456789"
 
     def __init__(self, puzzle, technique='single_position'):
+
         self._puzzle = puzzle
         self.technique = technique
         self._combined = lambda rows, columns: [each_letter + every_number for each_letter in rows for every_number in columns]
@@ -33,7 +34,20 @@ class Sudoku:
         self._values = dict(zip(self._boxes, ["123456789" if element == "." else element for element in self._puzzle]))
 
     def single_position(self):
-        pass
+
+        """
+        Completes an iteration of the single_position technique and returns a
+        dictionary.
+        Key = Sqaure coordinate (example: A1)
+        Value = Solved squares or possible numbers that can be entered in a square (example: '569' or '1')
+        """
+
+        solved_values = [box for box in self._values.keys() if len(self._values[box]) == 1]
+        for box in solved_values:
+            digit = self._values[box]
+            for peer in self._peers[box]:
+                self._values[peer] = self._values[peer].replace(digit, "")
+        return self._values
 
     def single_candidate(self):
         pass
