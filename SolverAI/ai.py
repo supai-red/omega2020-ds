@@ -22,6 +22,7 @@ class Sudoku:
     def __init__(self, puzzle, technique='single_position'):
         self.puzzle = puzzle
         self.technique = technique
+        self._combined = lambda rows, columns: [each_letter + every_number for each_letter in rows for every_number in columns]
 
     def single_position(self):
         pass
