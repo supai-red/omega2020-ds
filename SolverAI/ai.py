@@ -16,6 +16,9 @@ class Sudoku:
                         all techniques use 'single_position'
     """
 
+    row_values = "ABCDEFGHI"
+    column_values = "123456789"
+
     def __init__(self):
         pass
 
@@ -46,7 +49,7 @@ class Sudoku:
         pass
 
     def show_solved_attempt(self):
-        
+
         """
         Shows the puzzle as a 2-D string, after attempting a Sudoku technique.
         If the puzzle cannot be solved, unsolved squares will be replaced by the
