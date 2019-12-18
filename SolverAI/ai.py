@@ -38,8 +38,11 @@ class Sudoku:
         """
         Completes an iteration of the single_position technique and returns a
         dictionary.
+        ----------------------------------------------------------------------
+
         Key = Sqaure coordinate (example: A1)
-        Value = Solved squares or possible numbers that can be entered in a square (example: '569' or '1')
+        Value = Solved squares or possible numbers that can be entered in a
+                square (example: '569' or '1')
         """
 
         solved_values = [box for box in self._values.keys() if len(self._values[box]) == 1]
@@ -50,7 +53,22 @@ class Sudoku:
         return self._values
 
     def single_candidate(self):
-        pass
+        """
+        Completes an iteration of the single_candidate technique and returns a
+        dictionary.
+        ----------------------------------------------------------------------
+        
+        Key = Sqaure coordinate (example: A1)
+        Value = Solved squares or possible numbers that can be entered in a
+                square (example: '569' or '1')
+        """
+
+        for unit in self._unitlist:
+            for digit in "123456789":
+                dplaces = [box for box in self._units if digit in self._values[box]]
+                if len(dplaces) == 1:
+                    self._values[dplaces[0]] = digit
+        return self._values
 
     def solve(self):
 
