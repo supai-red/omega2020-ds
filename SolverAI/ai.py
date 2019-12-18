@@ -57,7 +57,7 @@ class Sudoku:
         Completes an iteration of the single_candidate technique and returns a
         dictionary.
         ----------------------------------------------------------------------
-        
+
         Key = Sqaure coordinate (example: A1)
         Value = Solved squares or possible numbers that can be entered in a
                 square (example: '569' or '1')
@@ -80,7 +80,44 @@ class Sudoku:
         3. string - "Number of iterations made: 5" This is how many times the
                      algorithm had to iterate through the puzzle
         """
-        pass
+
+        if self.technique == "single_position":
+            stalled = False
+            start = 0
+            while not stalled:
+                start += 1
+                solved_values_before = len([box for box in self._values.keys() if len(self._values[box]) == 1])
+                self._values = self.single_position()
+                solved_values_after = len([box for box in self._values.keys() if len(self._values[box]) == 1])
+                stalled = solved_values_before == solved_values_after
+                if len([box for box in self._values.keys() if len(self._values[box]) == 0]):
+                    return False
+
+            if solved_values_before == 81:
+                return ("Solved", self._values, f"Number of iterations made: {start}")
+            else:
+                return ("Not solved", self._values, f"Number of iterations made: {start}")
+
+        elif self.technique == "single_candidate":
+            stalled = False
+            start = 0
+            while not stalled:
+                start += 1
+                solved_values_before = len([box for box in self._values.keys() if len(self._values[box]) == 1])
+                self._values = self.single_position()
+                self._values = self.single_candidate()
+                solved_values_after = len([box for box in self._values.keys() if len(self._values[box]) == 1])
+                stalled = solved_values_before == solved_values_after
+                if len([box for box in self._values.keys() if len(self._values[box]) == 0]):
+                    return False
+
+            if solved_values_before == 81:
+                return ("Solved", self._values, f"Number of iterations made: {start}")
+            else:
+                return ("Not solved", self._values, f"Number of iterations made: {start}")
+
+        else:
+            print("That is not an option")
 
     def show_puzzle(self):
 
