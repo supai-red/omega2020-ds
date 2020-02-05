@@ -2,6 +2,8 @@
 
 You can find the project at [Omega2020 DS API](https://api.lambda-omega2020.com/)
 
+as a note for Labs 20, this app as is deploys on AWS Elastic Beanstalk, so you can use it as a reference on how to architect your own app on Elastic Beanstalk (the .ebextensions folder and config file is required to set up CORS headers and HTTPS connections, HTTPS is required to connect to your production front end on Netlify)
+
 ## Contributors
 
 
